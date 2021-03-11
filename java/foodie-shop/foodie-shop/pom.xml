@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.seehope</groupId>
+	<artifactId>foodie-shop</artifactId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+
+	<!-- 第一个，提供了子类的jar包版本控制以及工程环境初始化 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<project.version>0.0.1-SNAPSHOT</project.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>foodie-shop-common</module>
+		<module>foodie-shop-pojo</module>
+		<module>foodie-shop-mapper</module>
+		<module>foodie-shop-service</module>
+		<module>foodie-shop-controller</module>
+		<module>shop-mybatis-generator</module>
+		<module>foodie-shop-browser</module>
+	</modules>
+</project>

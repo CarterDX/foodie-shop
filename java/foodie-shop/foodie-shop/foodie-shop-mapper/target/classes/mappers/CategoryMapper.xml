@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.seehope.foodie.mapper.CategoryMapper">
+
+
+	<resultMap type="net.seehope.foodie.pojo.vo.CategoryVo"
+		id="baseCatgoryVoResultMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="type" column="type" />
+		<result property="fatherId" column="father_id" />
+		<result property="logo" column="logo" />
+		<result property="slogan" column="slogan" />
+		<result property="catImage" column="cat_image" />
+		<result property="bgColor" column="bg_color" />
+		<collection property="subCatList"
+			ofType="net.seehope.foodie.pojo.Category">
+			<result property="id" column="subId" />
+			<result property="name" column="subName" />
+			<result property="type" column="subType" />
+			<result property="fatherId" column="subFatherId" />
+			<result property="logo" column="subLogo" />
+			<result property="slogan" column="subSlogan" />
+			<result property="catImage" column="subImage" />
+			<result property="bgColor" column="subBgColor" />
+		</collection>
+	</resultMap>
+
+	<select id="querySubCatgoryLazyLoad" parameterType="String"
+		resultMap="baseCatgoryVoResultMap">
+		SELECT
+		c1.*,
+		c2.id AS subId,
+		c2.`name` AS subName,
+		c2.type AS
+		subType,
+		c2.father_id AS subFatherId,
+		c2.slogan AS subSlogan,
+		c2.logo AS
+		subLogo,
+		c2.cat_image AS subImage,
+		c2.bg_color AS subBgColor
+		FROM
+		category c1
+		LEFT JOIN category c2 ON c1.id = c2.father_id
+		WHERE
+		c1.father_id = #{rootCatId}
+	</select>
+
+
+
+	<resultMap
+		type="net.seehope.foodie.pojo.vo.RenderIndexInfoVo"
+		id="baseIndexInfoMapping">
+		<result property="rootCatName" column="root_cat_name" />
+		<result property="slogan" column="slogan" />
+		<result property="bgColor" column="bg_color" />
+		<result property="catImage" column="cat_image" />
+		<collection property="simpleItemList"
+			ofType="net.seehope.foodie.pojo.vo.SimpleItemVo">
+			<id property="itemId" column="item_id" />
+			<result property="itemName" column="item_name" />
+			<result property="itemUrl" column="item_url" />
+		</collection>
+	</resultMap>
+
+	<select id="queryIndexInfo" resultMap="baseIndexInfoMapping"
+		parameterType="String">
+		SELECT
+		c.`name` as root_cat_name,
+		c.slogan,
+		c.bg_color,
+		c.cat_image,
+		i.item_name ,
+		i.id as item_id,
+		im.url as item_url
+		FROM
+		category c
+		LEFT JOIN items i ON c.id = i.root_cat_id
+		LEFT JOIN items_img
+		im ON i.id = im.item_id
+		WHERE
+		c.id = #{rootCatId}
+		AND im.is_main =1
+	</select>
+
+
+</mapper>

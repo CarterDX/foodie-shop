@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.seehope.foodie.mapper.ItemsCommentsMapper">
+
+	<resultMap type="net.seehope.foodie.pojo.dto.CountDto"
+		id="commentsLevelResultMap">
+		<result property="number" column="number" />
+		<result property="commentLevel" column="comment_level" />
+	</resultMap>
+	<select id="queryCommentsLevel" parameterType="String"
+		resultMap="commentsLevelResultMap">
+		SELECT
+		count( * ) AS number,
+		comment_level
+		FROM
+		items_comments
+		WHERE
+		item_id = #{itemId}
+		GROUP BY
+		comment_level
+	</select>
+
+	<resultMap type="net.seehope.foodie.pojo.vo.CommentRecordVo"
+		id="commentRecordVoResultMap">
+		<result property="nickname" column="nickname" />
+		<result property="content" column="content" />
+		<result property="specName" column="sepc_name" />
+		<result property="userFace" column="user_face" />
+		<result property="createdTime" column="created_time" />
+	</resultMap>
+
+	<select id="renderCommentByItemIdAndLevel"
+		parameterType="net.seehope.foodie.pojo.bo.RenderCommentLevelBo"
+		resultMap="commentRecordVoResultMap">
+		SELECT
+		u.username AS nickname,
+		ic.content,
+		ic.sepc_name,
+		ic.created_time,
+		u.face AS user_face
+		FROM
+		items_comments ic
+		LEFT JOIN
+		users u ON ic.user_id
+		= u.id
+
+		<where>
+			and item_id = #{itemId}
+			<if test="level !=null and level != ''">
+				and comment_level = #{level}
+			</if>
+		</where>
+
+	</select>
+
+</mapper>

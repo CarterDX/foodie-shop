@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="foodie-shop-app" />
+        <module name="foodie-shop-browser" />
+        <module name="foodie-shop-common" />
+        <module name="foodie-shop-controller" />
+        <module name="foodie-shop-mapper" />
+        <module name="foodie-shop-pojo" />
+        <module name="foodie-shop-service" />
+        <module name="shop-mybatis-generator" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="foodie-shop" target="1.8" />
+      <module name="foodie-shop-app" target="1.8" />
+      <module name="foodie-shop-browser" target="1.8" />
+      <module name="foodie-shop-common" target="1.8" />
+      <module name="foodie-shop-controller" target="1.8" />
+      <module name="foodie-shop-mapper" target="1.8" />
+      <module name="foodie-shop-pojo" target="1.8" />
+      <module name="foodie-shop-service" target="1.8" />
+      <module name="shop-mybatis-generator" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

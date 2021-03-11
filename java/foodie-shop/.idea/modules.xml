@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop.iml" filepath="$PROJECT_DIR$/foodie-shop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-app/foodie-shop-app.iml" filepath="$PROJECT_DIR$/foodie-shop-app/foodie-shop-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-browser/foodie-shop-browser.iml" filepath="$PROJECT_DIR$/foodie-shop-browser/foodie-shop-browser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-common/foodie-shop-common.iml" filepath="$PROJECT_DIR$/foodie-shop-common/foodie-shop-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-controller/foodie-shop-controller.iml" filepath="$PROJECT_DIR$/foodie-shop-controller/foodie-shop-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-mapper/foodie-shop-mapper.iml" filepath="$PROJECT_DIR$/foodie-shop-mapper/foodie-shop-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-pojo/foodie-shop-pojo.iml" filepath="$PROJECT_DIR$/foodie-shop-pojo/foodie-shop-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodie-shop-service/foodie-shop-service.iml" filepath="$PROJECT_DIR$/foodie-shop-service/foodie-shop-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-mybatis-generator/shop-mybatis-generator.iml" filepath="$PROJECT_DIR$/shop-mybatis-generator/shop-mybatis-generator.iml" />
+    </modules>
+  </component>
+</project>

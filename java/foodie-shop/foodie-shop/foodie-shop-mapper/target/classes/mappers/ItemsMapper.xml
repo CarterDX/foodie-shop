@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.seehope.foodie.mapper.ItemsMapper">
+
+
+	<resultMap type="net.seehope.foodie.pojo.vo.SearchItemVo"
+		id="baseSearchBoResultMap">
+		<result property="price" column="price" />
+		<result property="imgUrl" column="url" />
+		<result property="itemName" column="item_name" />
+		<result property="sellCounts" column="sell_counts" />
+		<result property="itemId" column="id" />
+
+	</resultMap>
+	<select id="queryItemVoLikeName"
+		parameterType="net.seehope.foodie.pojo.bo.SearchBo"
+		resultMap="baseSearchBoResultMap">
+		SELECT
+		iim.* ,ip.price
+		FROM
+		(
+		SELECT
+		i.id,
+		i.item_name ,
+		i.sell_counts,
+		im.url
+		FROM
+		items i
+		LEFT JOIN ( SELECT item_id, url FROM items_img WHERE
+		is_main =
+		1 ) im ON
+		i.id = im.item_id
+		) iim
+		LEFT JOIN ( SELECT item_id,
+		min(
+		price_discount ) AS price FROM items_spec
+		GROUP BY item_id ) ip ON
+		iim.id = ip.item_id WHERE item_name like
+		'%${keywords}%' ORDER BY
+		<choose>
+			<when test='sort=="k"'>
+				item_name ASC
+			</when>
+			<when test='sort=="c"'>
+				sell_counts DESC
+			</when>
+			<when test='sort=="p"'>
+				price ASC
+			</when>
+		</choose>
+	</select>
+
+</mapper>

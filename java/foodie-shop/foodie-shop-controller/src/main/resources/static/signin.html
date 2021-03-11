@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		子模块登录页面 controller中的实现
+		<fieldset>
+			<legend>登录表单</legend>
+			<form action="/authentication/form" method="post">
+				<input type="text" name="username" placeholder="username"> <br>
+				<input type="password" name="password" placeholder="password">
+				<br> <input type="text" name="imageCode" placeholder="imageCode">
+				<img src="/code/image"> <br> 记住我:<input type="checkbox" checked="checked" name="remember-me"> <input type="submit"
+				 value="submit">
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend>短信登录表单</legend>
+			<form action="/authentication/mobile" method="post">
+				<input type="text" name="username" placeholder="username"> <br>
+				<input type="password" name="password" placeholder="password">
+				<br> 手机号： <input type="text" name="mobile" id="mobile" placeholder="mobile" value="18000000000"> <br>
+				<button id="submitMobile" type="button">点击发送验证码</button>
+				验证码： <input type="text" name="smsCode" placeholder="smsCode">
+				<br> 记住我:<input type="checkbox" checked="checked" name="remember-me"> <input type="submit" value="submit">
+			</form>
+		</fieldset>
+
+		<!-- CDN 内容分发网络 -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				$("#submitMobile").click(function() {
+					$.ajax({
+						type: "get",
+						url: "/code/sms?mobile=18000000000",
+						success: function(result) {
+							console.log(result);
+						},
+						error: function(result) {
+							console.log(result);
+						}
+					});
+				});
+
+			});
+		</script>
+	</body>
+</html>

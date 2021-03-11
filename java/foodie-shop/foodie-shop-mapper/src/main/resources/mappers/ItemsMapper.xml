@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.seehope.foodie.mapper.ItemsMapper">
+
+	<resultMap type="net.seehope.foodie.pojo.vo.SearchItemVo"
+		id="baseSearchBoResultMap">
+		<result property="price" column="price" />
+		<result property="imgUrl" column="url" />
+		<result property="itemName" column="item_name" />
+		<result property="sellCounts" column="sell_counts" />
+		<result property="itemId" column="id" />
+
+	</resultMap>
+	<select id="queryItemVoLikeName"
+		parameterType="net.seehope.foodie.pojo.bo.SearchBo"
+		resultMap="baseSearchBoResultMap">
+		SELECT
+		iim.* ,ip.price
+		FROM
+		(
+		SELECT
+		i.id,
+		i.item_name ,
+		i.sell_counts,
+		im.url
+		FROM
+		items i
+		LEFT JOIN ( SELECT item_id, url FROM items_img WHERE
+		is_main =
+		1 ) im ON
+		i.id = im.item_id
+		) iim
+		LEFT JOIN ( SELECT item_id,
+		min(
+		price_discount ) AS price FROM items_spec
+		GROUP BY item_id ) ip ON
+		iim.id = ip.item_id WHERE item_name like
+		'%${keywords}%' ORDER BY
+		<choose>
+			<when test='sort=="k"'>
+				item_name ASC
+			</when>
+			<when test='sort=="c"'>
+				sell_counts DESC
+			</when>
+			<when test='sort=="p"'>
+				price ASC
+			</when>
+		</choose>
+	</select>
+
+
+	<resultMap type="net.seehope.foodie.pojo.vo.ShopCartItemVo"
+		id="shopCartItemVoResultMap">
+		<result property="specId" column="spec_id" />
+		<result property="itemId" column="id" />
+		<result property="itemName" column="item_name" />
+		<result property="specName" column="name" />
+		<result property="priceNormal" column="price_normal" />
+		<result property="priceDiscount" column="price_discount" />
+		<result property="itemImgUrl" column="url" />
+	</resultMap>
+
+	<select id="queryShopCartItemBySpecIds"
+		resultMap="shopCartItemVoResultMap">
+		SELECT
+		iim.*,
+		ic.price_normal,
+		ic.price_discount,
+		ic.`name`,
+		ic.id AS
+		spec_id
+		FROM
+		(
+		SELECT
+		i.item_name,
+		imm.url,
+		i.id
+		FROM
+		( SELECT im.item_id,
+		im.url FROM items_img im WHERE im.is_main = 1 )
+		imm
+		LEFT JOIN items i ON
+		imm.item_id = i.id
+		) iim
+		LEFT JOIN items_spec ic ON iim.id = ic.item_id
+		WHERE ic.id
+		<foreach collection="array" item="id" open="in (" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+
+</mapper>

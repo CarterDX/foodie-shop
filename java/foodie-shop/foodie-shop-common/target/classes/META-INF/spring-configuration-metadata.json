@@ -1,0 +1,33 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "net.seehope.foodie.properties.ProjectProperties",
+      "name": "net.seehope",
+      "type": "net.seehope.foodie.properties.ProjectProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "net.seehope.foodie.properties.ProjectProperties",
+      "name": "net.seehope.browser",
+      "type": "net.seehope.foodie.properties.BrowserProperties"
+    },
+    {
+      "sourceType": "net.seehope.foodie.properties.ProjectProperties",
+      "name": "net.seehope.code",
+      "type": "net.seehope.foodie.properties.ValidateCodeProperties"
+    },
+    {
+      "sourceType": "net.seehope.foodie.properties.ProjectProperties",
+      "name": "net.seehope.qq",
+      "type": "net.seehope.foodie.properties.QQProperties"
+    },
+    {
+      "sourceType": "net.seehope.foodie.properties.ProjectProperties",
+      "defaultValue": "http:\/\/122.152.205.72:88\/group1\/M00\/00\/05\/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png",
+      "name": "net.seehope.user-default-face",
+      "type": "java.lang.String"
+    }
+  ]
+}

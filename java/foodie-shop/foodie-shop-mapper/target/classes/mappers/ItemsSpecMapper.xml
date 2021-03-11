@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.seehope.foodie.mapper.ItemsSpecMapper">
+
+	<update id="decreaseStock"
+		parameterType="net.seehope.foodie.pojo.ItemsSpec">
+		update items_spec ic set ic.stock = ic.stock - #{stock}
+		where ic.stock - #{stock} >= 0 and ic.id = #{id}
+	</update>
+	
+
+</mapper>
